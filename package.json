@@ -1,6 +1,6 @@
 {
   "name": "nexca-ui",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "Minimal React-compatible UI library using TypeScript and CSS. Includes auto-import styling and supports JSX.",
   "main": "dist/index.js",
   "types": "dist/types/index.d.ts",
@@ -9,7 +9,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsc && cp src/styles.css dist/"
+    "build": "tsc"
   },
   "keywords": [
     "ui-library"
@@ -19,5 +19,8 @@
   "dependencies": {
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.1.6"
   }
 }
