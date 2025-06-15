@@ -67,3 +67,49 @@ One object per HTML element and other need in your document.
 - Change its content
 - Remove it
 - Add new elements to it
+
+## Select elements from the DOM
+
+- By ID
+- By Class Name
+- By Name
+- By css Selector
+- Navigating DOM structure
+
+### When selecting elements , some functions return...
+
+- One HTML element (HTMLElement)
+- A Live HTML element collection (HTMLCollection)
+- Static element collection (NodeList)
+
+### Function to get a reference to one DOM element
+
+- getElementById
+- querySelector
+
+When you use a Function that returns one element, it can also return null if no
+node was found.
+
+### Function to get a reference to multiple DOM elements
+
+- getELementByTagName
+- getElementByClassName
+- querySelectorAll()
+- getElementByName
+
+When you use a function that returns multiple elements, it ca also return
+an empty collection if no element were found.
+
+HTMLCollection (live) don't have all the modern Array interface, such as
+filter, map , reduce or forEach.
+
+You can add modern array functions to HTMLCollection by creating
+a Array from it using Array.from(collection)
+
+## With an HTML Element in JavaScript you can 
+- Read and change attributes value
+- Read and change styles 
+- Hook event listeners
+- Add,remove or move children elements 
+- Read and change it contents
+- More APIs 
