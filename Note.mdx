@@ -106,10 +106,97 @@ filter, map , reduce or forEach.
 You can add modern array functions to HTMLCollection by creating
 a Array from it using Array.from(collection)
 
-## With an HTML Element in JavaScript you can 
+## With an HTML Element in JavaScript you can
+
 - Read and change attributes value
-- Read and change styles 
+- Read and change styles
 - Hook event listeners
-- Add,remove or move children elements 
+- Add,remove or move children elements
 - Read and change it contents
-- More APIs 
+- More APIs
+
+## How to read or change attribute of DOM element
+
+```javascript
+element.hidden = false;
+element.src = "logo.png";
+element.className = "myClass";
+```
+
+## How to read or change styles of DOM element
+
+```javascript
+element.style.color = "blue";
+element.style.fontSize = "1.2em";
+element.style.borderRightColor = "#FCFCFC";
+```
+
+## How to listen to event of an HTML element
+
+```javascript
+element.addEventLister('event name', function)
+```
+
+or
+
+```javascript
+function eventHandler(event) {
+  // do something
+}
+element.addEventLister("event name", eventHandler);
+```
+
+or this way too
+
+```javascript
+element.addEventLister("click", (event) => {
+  // do something
+});
+```
+
+### Accessing and Editing Contents of the Elements
+
+- Accessing textContent
+- Accessing innerHTML
+- Using DOM APIs to create new nodes
+
+#### Working with textContent
+
+```javascript
+const element = document.querySelector("#message");
+
+// we read the current element's content as string
+const content = element.textContent;
+
+// We change the contents of the element with a new string
+element.textContent = "The text has been changed";
+```
+
+#### Working with innerHTML
+
+```javascript
+const element = document.querySelector("#section-6 header");
+
+// we read the current element's content as string
+const content = element.textContent;
+
+// We change the contents of the element with a new string
+element.textContent = `
+  <h1>My App</h1>
+  <p>The best platform for learning frontend</p>
+`;
+```
+
+#### Working with DOM API to create or edit content
+
+```javascript
+const element = document.querySelector("#section-6 header");
+
+const h1 = document.createElement('h1');
+h1.textContent = "My App"
+element.appendChild(h1);
+
+const p = document.createElement('p');
+p.textContent = "The best platform for learning frontend"
+element.appendChild(p)
+```
