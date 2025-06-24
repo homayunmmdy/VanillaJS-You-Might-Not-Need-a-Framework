@@ -192,11 +192,31 @@ element.textContent = `
 ```javascript
 const element = document.querySelector("#section-6 header");
 
-const h1 = document.createElement('h1');
-h1.textContent = "My App"
+const h1 = document.createElement("h1");
+h1.textContent = "My App";
 element.appendChild(h1);
 
-const p = document.createElement('p');
-p.textContent = "The best platform for learning frontend"
-element.appendChild(p)
+const p = document.createElement("p");
+p.textContent = "The best platform for learning frontend";
+element.appendChild(p);
 ```
+
+## Scoping querySelector
+
+querySelector always pick the first element if you want multiple you have to use querySelectorAll it's pick them inside array
+if the thing you select is not exist the querySelector will show null but querySelectorAll show empty NodeList.
+
+if we have nav and we want to get the span inside it we do this
+
+```javascript
+document.querySelector("span#badge");
+```
+
+now we add query for hole DOM we can narrow this like this
+
+```javascript
+const nav = document.querySelector("nav");
+nav.querySelector("span#badge");
+```
+
+now we scope the DOM it's only search inside the nav which can improve the Performance 
