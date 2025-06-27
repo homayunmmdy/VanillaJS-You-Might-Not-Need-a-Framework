@@ -246,21 +246,22 @@ now we scope the DOM it's only search inside the nav which can improve the Perfo
 
 - onevent Properties (e.g., onclick, onload)
 
-
 ```javascript
 function eventHandler(event) {
   // Handler logic
 }
 
 element.onclick = eventHandler;
-element.onclick = (event) => { 
+element.onclick = (event) => {
   // This REPLACES the previous handler
 };
 ```
+
 ### Why it gets replaced:
+
 - Each **onevent** property can only hold one function reference
-- Assigning a new handler overwrites the previous one 
-- Behaves like any other object property assignment 
+- Assigning a new handler overwrites the previous one
+- Behaves like any other object property assignment
 
 - addEventLister
 
@@ -269,13 +270,42 @@ function eventHandler(event) {
   // Handler logic
 }
 
-element.addEventListener('click', eventHandler);
-element.addEventListener('click', (event) => {
+element.addEventListener("click", eventHandler);
+element.addEventListener("click", (event) => {
   // This ADDS to existing handlers
 });
 ```
 
 ### Why it doesn't replace:
-- Maintains an internal list of handlers for each event type 
-- can register multiple handlers for the same event 
+
+- Maintains an internal list of handlers for each event type
+- can register multiple handlers for the same event
 - More flexible for complex Applications
+
+### Advance Event Handler
+
+```javascript
+function eventHandler(event) {}
+
+const options = {
+  once: true, //by default is false
+  passive: true,
+};
+
+element.addEventListener("load", eventHandler, options);
+```
+
+in the code example after once the event is removed.
+**remove** in browser we don't do the clean up and when user leave the page
+everything happened automatic and only this useful for Single page application.
+
+```javascript
+element.removeEventListener("load", eventHandler);
+```
+
+### Dispatching Custom Event
+
+```javascript
+const event = new Event("mycustomname");
+element.dispatchEvent(event);
+```
