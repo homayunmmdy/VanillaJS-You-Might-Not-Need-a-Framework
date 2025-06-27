@@ -219,8 +219,63 @@ const nav = document.querySelector("nav");
 nav.querySelector("span#badge");
 ```
 
-now we scope the DOM it's only search inside the nav which can improve the Performance 
+now we scope the DOM it's only search inside the nav which can improve the Performance
 
-## DOMContentLoaded VS load 
+## DOMContentLoaded VS load
+
 **load:** is waiting to everything in the page to be loaded styles , images , fonts when everything is ready.
 **DOMContentLoaded:** it's mean to load as soon as possible this happened before rendering
+
+## More on Event Binding
+
+- Each DOM element has a list of possible events we can listen to.
+- Basic: load , click , dblclick
+- value change
+- Keyboard Events keyup, keydown,keypress
+- Mouse Event mouseover , mouseout , getElementByClassName
+- Pointer and Touch Events
+- Scroll, Focus more APIs
+- Some specific objects have special events
+- DOMContentLoaded, popstate in window
+
+> The spec's naming pattern is to use lowercase with no word separator for event
+> names. That's why we can end up with name like this
+> **webkitcurrentplaybacktargetiswirelesschanged**
+
+## Binding function to event in DOM objects
+
+- onevent Properties (e.g., onclick, onload)
+
+
+```javascript
+function eventHandler(event) {
+  // Handler logic
+}
+
+element.onclick = eventHandler;
+element.onclick = (event) => { 
+  // This REPLACES the previous handler
+};
+```
+### Why it gets replaced:
+- Each **onevent** property can only hold one function reference
+- Assigning a new handler overwrites the previous one 
+- Behaves like any other object property assignment 
+
+- addEventLister
+
+```javascript
+function eventHandler(event) {
+  // Handler logic
+}
+
+element.addEventListener('click', eventHandler);
+element.addEventListener('click', (event) => {
+  // This ADDS to existing handlers
+});
+```
+
+### Why it doesn't replace:
+- Maintains an internal list of handlers for each event type 
+- can register multiple handlers for the same event 
+- More flexible for complex Applications
