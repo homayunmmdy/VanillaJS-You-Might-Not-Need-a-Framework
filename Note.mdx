@@ -322,3 +322,27 @@ HTMLElement.prototype.off = (a, b) => this.removeEventListener(a, b);
 HTMLElement.prototype.$ = (s) => this.querySelector(s);
 HTMLElement.prototype.$ = (s) => this.querySelectorAll(s);
 ```
+
+## Single Page Applications : how to change content
+
+- Remove Previous Page and Inject New Page into the DOM
+- Hide Previous Page and Show Current Page
+
+### History API
+
+we can push new "fake" navigation URLs and listen for changes
+
+```javascript
+// pushing a new URL; the second argument is unused
+history.pushSate(optional_state, null, "/new-url");
+
+// to listen for changes in URL within the same page nvigation
+window.addEventListener("popstate", (event) => {
+  let url = location.href;
+});
+```
+
+> popstate won't be fired if the user clicks on an external link or change the URL manually
+
+> If you are creating a SPA, configure your server properly and check the URL when the whole page loads for first time.
+
