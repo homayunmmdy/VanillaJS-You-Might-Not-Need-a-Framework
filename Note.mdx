@@ -479,3 +479,38 @@ connectedCallback() {
 </template>
 ```
 
+## Shadow DOM
+
+A private, isolated DOM tree within a web component that is separate from the main document's DOM tree.
+
+- Allows more control over styling and encapsulation of functionality of a Custom Element
+- By default, Css declared in the main DOM won't be applied to the Shadow DOM.
+- CSS declared in the Shadow DOM applies only on there.
+- There are new pseudo-classes and pseudo-element to allow communication between DOMs in stylesheet.
+- It can be opened or closed defining visibility from the outer DOM.
+
+> We have to create a Shadow DOM manually in our Custom Element, typically in the constructor and we save it.
+
+```javascript
+class MyElement extend HTMLElement {
+  constructor() {
+    super();
+    this.root = this.attachShadow({mode: "open"})
+  }
+
+  connectedCallback() {
+    this.root.appendChild(...)
+  }
+}
+```
+
+after this your style declaration ONLY changes h1s inside the custom elements
+
+### Where to define HTML for a Custom Element
+
+- There are several alternatives
+  - Use DOM APIs
+  - Use a <code>template</code> in the main HTML
+  - Use an external HTML file loaded with fetch (it can be prefetched)
+  - Using innerHTML
+  - Using DOMParser
