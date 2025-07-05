@@ -351,3 +351,83 @@ window.addEventListener("popstate", (event) => {
 childNodes returns child nodes (element nodes, text nodes, and comment nodes). children returns child elements (not text and comment nodes).
 
 > Make the Router by receiving a collection of routes (paths as regex and Component to render)
+
+## Web Component
+
+A modular, reusable building block for web development that encapsulates a set of related
+functionality and user interface elements.
+
+> In short , your own custom HTML tag element.
+
+- Compatible with every browser
+- It's actually a set of standards:
+- **Custom Elements**
+- **HTML Templates**
+- **Shadow DOM**
+- Declarative Shadow DOM
+- It's similar to the idea of Component on most of the libraries for javascript
+- we have freedom of choice on how to define them and use them.
+
+### Custom Element
+
+A way to define new , reusable HTML elements with custom
+behavior and functionality using JavaScript.
+
+> The HTML tag we define must contain a hyphen (-) to assure future Compatibility
+
+### Custom Element Lifecycle
+
+we can override some methods of the super class
+
+```javascript
+class MyElement extends HTMLElement {
+
+  constructor { // set up initial state , event listeners, etc.
+    super()
+  }
+  connectedCallback()     // The element is added to the document
+  disconnectCallback()    // The element is removed to the document
+  adoptCallback()         // The element has been moved to a new document
+
+  attributeChangedCallback(name , olValue,new Value()) {}
+}
+
+customElement.define('my-element', MyElement);
+```
+
+## Custom Element with Slots
+
+The slot is the content that we can define the component's children with templates
+we can have more than one slot.
+
+```javascript
+class MyElement extends HTMLElement {
+
+  constructor {
+    super()
+  }
+}
+
+customElement.define('my-element', MyElement);
+```
+
+```html
+<body>
+  <my-element>
+    <div>
+      <h2>Slot of My Element</h2>
+    </div>
+  </my-element>
+  <body></body>
+</body>
+```
+
+## Custom Element with Customized Builtins
+
+We can extend HTML elements with our won implementation
+
+> Not available in Safari in 2023
+
+```html
+<div is="my-element"></div>
+```
