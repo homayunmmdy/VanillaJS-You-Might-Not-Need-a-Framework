@@ -3,6 +3,16 @@ export class MenuPage extends HTMLElement {
     super();
 
     this.root = this.attachShadow({ mode: "open" });
+
+    const style = document.createElement('style');
+    this.root.appendChild(style)
+
+    async function loadCSS() {
+        const response = await fetch('/components/MenuPage.css');
+        const css = await response.text();
+        style.textContent = css
+    }
+    loadCSS();
   }
 
   // when the component is attached to the DOM
