@@ -431,3 +431,51 @@ We can extend HTML elements with our won implementation
 ```html
 <div is="my-element"></div>
 ```
+
+## Template Element
+
+Fragments of markup that ca be cloned and inserted into document at runtime,
+with reusable HTML content that ca be rendered an modified dynamically.
+
+> It allow us to define HTML content that is not going to be parsed by the browser and it's going to be available fo usage only if we clone it.
+
+```html
+<template id="template1">
+  <header>
+    <h1>This is a template</h1>
+    <p>This content is not render initially</p>
+  </header>
+</template>
+```
+
+### Template Element Cloning
+
+We clone the template and we append it as a child; typically in **connectedCallback**
+method of the Custom Element.
+
+```javascript
+connectedCallback() {
+  const template = document.getElementById('template1');
+  const content = template.content.cloneNode(true);
+  this.appendChild(content);
+}
+```
+
+> By default, the nodes of our custom element are part of the same page's
+> DOM,so CSS style declaration applies to all document.
+
+```html
+<template id="template1">
+  <style>
+    /*this declaration als changes h1s outside of the custom element*/
+    h1 {
+      color: red;
+    }
+  </style>
+  <header>
+    <h1>This is a template</h1>
+    <p>This content is not render initially</p>
+  </header>
+</template>
+```
+
