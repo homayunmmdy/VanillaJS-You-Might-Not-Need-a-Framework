@@ -1,5 +1,5 @@
 import { getProductById } from '../services/Menu.js';
-import { addToCart } from './Order.js';
+import { addToCart } from '../services/Order.js';
 
 export default class DetailsPage extends HTMLElement {
 

@@ -1,50 +1,60 @@
 const Router = {
-  init: () => {
-    document.querySelectorAll("a.navlink").forEach((a) => {
-      a.addEventListener("click", (event) => {
-        event.preventDefault();
-
-        const url = event.target.getAttribute("href");
-        Router.go(url);
-      });
-    });
-    // Event Handler for URL changes
-    window.addEventListener('popstate', event => {
-      Router.go(event.state.route,false);
-    })
-    // Checking the initial URL
-    Router.go(location.pathname);
-  },
-  go: (route, addToHistory = true) => {
-    console.log(`Going to ${route}`);
-
-    if (addToHistory) {
-      history.pushState({ route }, "", route);
-    }
-    let pageElement = null;
-    switch (route) {
-      case "/":
-        pageElement = document.createElement("menu-page");
-        break;
-      case "/order":
-        pageElement = document.createElement("order-page");
-        break;
-      default:
-        if (route.startsWith("/product-")) {
-          pageElement = document.createElement("detail-page");
-          const paramId = route.substring(route.lastIndexOf('-')+1);
-          pageElement.dataset.id = paramId;
+    init: () => {
+        document.querySelectorAll("a.navlink").forEach(a => {
+            a.addEventListener("click", event => {
+                event.preventDefault();
+                const href = event.target.getAttribute("href");
+                Router.go(href);
+            });
+        });  
+        // It listen for history changes
+        window.addEventListener('popstate',  event => {
+            Router.go(event.state.route, false);
+        });
+        // Process initial URL   
+        Router.go(location.pathname);
+    },    
+    go: (route, addToHistory=true) => {
+        if (addToHistory) {
+            history.pushState({ route }, '', route);
         }
-    }
+        let pageElement = null;
+        switch (route) {
+            case "/":
+                pageElement = document.createElement("menu-page");
+                break;
+            case "/order":
+                pageElement = document.createElement("order-page");
+                break;
+            default:
+                if (route.startsWith("/product-")) {                
+                    pageElement = document.createElement("details-page");
+                    pageElement.dataset.productId = route.substring(route.lastIndexOf("-")+1);
+                }
+                break;   
+        }
+        if (pageElement) {
+            // get current page element            
+            let currentPage = document.querySelector("main").firstElementChild; 
+            if (currentPage) {
+                let fadeOut = currentPage.animate([
+                    {opacity: 1}, {opacity: 0}
+                ],{ duration: 200});
+                fadeOut.addEventListener("finish", () => {
+                    currentPage.remove();
+                    document.querySelector("main").appendChild(pageElement);
+                    let fadeIn = pageElement.animate([
+                        {opacity: 0}, {opacity: 1}
+                    ],{ duration: 200});
+                });
+            } else {
+                document.querySelector("main").appendChild(pageElement);
+            }
 
-    if (pageElement) {
-      const cache = document.querySelector("main");
-      cache.innerHTML = "";
-      cache.appendChild(pageElement);
-      window.scrollX = 0;
-      window.scrollY = 0;
+        }
+
+        window.scrollX = 0;
     }
-  },
-};
+}
 
 export default Router;

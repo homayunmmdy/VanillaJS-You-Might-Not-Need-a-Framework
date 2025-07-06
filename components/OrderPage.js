@@ -9,20 +9,20 @@ export default class OrderPage extends HTMLElement {
   }
 
   constructor() {
-    super();
+      super();
+  
+      this.root = this.attachShadow({ mode: "open" });    
+      const styles = document.createElement("style");
+      this.root.appendChild(styles);
+      const section = document.createElement("section");
+      this.root.appendChild(section);
 
-    this.root = this.attachShadow({ mode: "open" });
-    const styles = document.createElement("style");
-    this.root.appendChild(styles);
-    const section = document.createElement("section");
-    this.root.appendChild(section);
-
-    async function loadCSS() {
-      const request = await fetch("/components/OrderPage.css");
-      styles.textContent = await request.text();
-    }
-    loadCSS();
-  }
+      async function loadCSS() {
+        const request = await fetch("/components/OrderPage.css");
+        styles.textContent = await request.text();
+      }
+      loadCSS();
+  }   
 
   connectedCallback() {
     window.addEventListener("appcartchange", () => {
@@ -32,8 +32,8 @@ export default class OrderPage extends HTMLElement {
   }
 
   render() {
-    let section = this.root.querySelector("section");
-    if (app.store.cart.length==0) {
+    let section = this.root.querySelector("section");   
+    if (app.store.cart.length==0) {     
       section.innerHTML = `
           <p class="empty">Your order is empty</p>
       `;
@@ -51,19 +51,19 @@ export default class OrderPage extends HTMLElement {
       this.setFormBindings(this.root.querySelector("form"));
 
       let total = 0;
-      for (let prodInCart of app.store.cart) {
-        const item = document.createElement("cart-item");
-        item.dataset.item = JSON.stringify(prodInCart);
-        this.root.querySelector("ul").appendChild(item);
-
-        total += prodInCart.quantity * prodInCart.product.price;
+      for (let prodInCart of app.store.cart) {      
+          const item = document.createElement("cart-item");
+            item.dataset.item = JSON.stringify(prodInCart);
+          this.root.querySelector("ul").appendChild(item);
+        
+          total += prodInCart.quantity * prodInCart.product.price;
       }
       this.root.querySelector("ul").innerHTML += `
             <li>
                 <p class='total'>Total</p>
                 <p class='price-total'>$${total.toFixed(2)}</p>
             </li>                
-        `;
+        `;            
     }
   }
   setFormBindings(form) {
