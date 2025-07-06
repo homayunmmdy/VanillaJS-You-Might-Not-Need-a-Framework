@@ -1,4 +1,8 @@
 {
-  "cSpell.words": ["webkitcurrentplaybacktargetiswirelesschanged"],
+  "cSpell.words": [
+    "appcardchange",
+    "appmenuchange",
+    "webkitcurrentplaybacktargetiswirelesschanged"
+  ],
   "liveServer.settings.port": 5516
 }
