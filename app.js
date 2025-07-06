@@ -10,6 +10,7 @@ import  OrderPage  from './components/OrderPage.js';
 import  DetailsPage  from './components/DetailsPage.js';
 import { loadData } from "./services/Menu.js";
 import ProductItem from './components/ProductItem.js';
+import CartItem from './components/CartItem.js';
 
 app.router = Router;
 app.store = Store;
